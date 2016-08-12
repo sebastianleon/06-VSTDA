@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Todolist</title>
+    <!-- bower:css -->
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+    <!-- endbower -->
+    <!-- inject:css -->
+    <link rel="stylesheet" href="/app/buttonstyle.css">
+    <link rel="stylesheet" href="/app/styles.css">
+    <!-- endinject -->
+</head>
+
+<body ng-controller="todoCtrl">
+    <div class="container">
+        <div class="row">
+            <div id="border" class="col-xs-6">
+                <label>To Do List</label>
+                <form class="form-group" ng-submit="todoAdd()">
+                    <input type="text" class="form-control" ng-model="todoInput.name" placeholder="Add New To Do" minlength="5" required>
+                    <br>
+                    <select class="form-control" ng-model=todoInput.priority>
+                        <option></option>
+                        <option value='1'>High Priority</option>
+                        <option value='2'>Medium Priotrity</option>
+                        <option value='3'>Low Priority</option>
+                    </select>
+                    <br>
+                    <input class="btn btn-success btn-lg btn-block" type="submit" value="Add">
+                    <button class="btn btn-danger btn-lg btn-block" ng-click="remove()">Remove marked</button>
+                </form>
+               
+                <br>
+            </div>
+            <div class="col-xs-6">
+                <h2>To Do List</h2>
+                <div>
+                    <button class="btn btn-danger btn-md" class="btn btn-primary" ng-click="myOrderBy='+priority';">Order By Highest Priority</button>
+                    <button class="btn btn-warning btn-md " class="btn btn-primary" ng-click="myOrderBy='name';">Order by Alphabet</button>
+                    <button class="btn btn-info btn-md " class="btn btn-primary" ng-click="myOrderBy='-priority';">Order By Lowest Priority</button>
+                </div>
+                <div class="alert" ng-repeat="x in todoList | orderBy:myOrderBy" ng-class="{
+             'alert-warning': x.priority == '2' ,
+             'alert-info': x.priority == '3',
+             'alert-danger': x.priority == '1' } ">
+                    {{x.name}}
+                    <input type="checkbox" ng-model="x.done"> <span ng-bind="x.todoText"></span></div>
+            </div>
+        </div>
+        <!--  <pre>{{todoList | json}}</pre> -->
+    </div>
+    <!-- bower:js -->
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <!-- endbower -->
+    <!-- inject:js -->
+    <script src="/app/app.js"></script>
+    <script src="/app/controller.js"></script>
+    <!-- endinject -->
+</body>
+
+</html>

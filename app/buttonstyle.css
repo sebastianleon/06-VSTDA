@@ -1,0 +1,15 @@
+
+#border {
+
+	border: 5px solid lightblue;
+	 padding-bottom: 50px;
+
+}
+label {
+
+	font-size: 25px;
+	background-color: lightblue;
+	display: block;
+	padding:0 100px;
+
+}
